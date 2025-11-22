@@ -35,13 +35,6 @@ st.markdown("""
         border-radius: 0.5rem;
         border-left: 4px solid #1f77b4;
     }
-    .insight-box {
-        background-color: #e8f4f8;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 4px solid #2ecc71;
-        margin: 1rem 0;
-    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -501,17 +494,7 @@ def main():
             else:
                 st.metric("Valorização Média", "N/A")
         
-        with col3:
-            if 'valorizacao_esperada_12m' in df_ml.columns:
-                regioes_promissoras = len(df_ml[df_ml['valorizacao_esperada_12m'] >= 15])
-                st.metric(
-                    "Regiões Promissoras",
-                    f"{regioes_promissoras}",
-                    delta=f">15% valorização",
-                    help="Municípios com valorização esperada > 15%"
-                )
-            else:
-                st.metric("Regiões Promissoras", "N/A")
+
         
         with col4:
             if metrics:
@@ -574,13 +557,6 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
         
         st.markdown('<div class="insight-box">', unsafe_allow_html=True)
-        st.markdown("### Principais Insights")
-        st.markdown(f"""
-        - **{regioes_promissoras} municípios** apresentam potencial de valorização superior a 15% em 2025
-        - A valorização média esperada é de **{val_media:.2f}%** em 12 meses
-        - Regiões com **maior PIB per capita** tendem a valorizar mais
-        - O modelo ensemble apresenta a **melhor performance** de predição
-        """)
         st.markdown('</div>', unsafe_allow_html=True)
     
     elif pagina == "🗺️ Mapa de Valorização":
